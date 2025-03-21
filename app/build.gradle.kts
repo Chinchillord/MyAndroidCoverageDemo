@@ -43,6 +43,23 @@ android {
     }
 }
 
+tasks.register<JacocoReport>("combinedCoverageReport") {
+    dependsOn("testDebugUnitTest", "createDebugCoverageReport")
+
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
+
+    val unitTestCoverage = fileTree("${buildDir}/jacoco/testDebugUnitTestCoverage.exec")
+    val androidTestCoverage = fileTree("buildDir}/outputs/code-coverage/connected/")
+
+    executionData.setFrom(files(unitTestCoverage, androidTestCoverage))
+
+    sourceDirectories.setFrom(files("${project.projectDir}/src/main/java"))
+    classDirectories.setFrom(files("${buildDir}/intermediates/javac/debug/classes"))
+}
+
 dependencies {
 
     implementation(libs.androidx.core.ktx)
