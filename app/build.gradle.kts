@@ -52,6 +52,11 @@ tasks.register<JacocoReport>("combinedCoverageReport") {
         html.required.set(true)
     }
 
+    val coverageSourceDirs = listOf(
+        "src/main/java",
+        "src/main/kotlin"
+    )
+
     val unitTestCoverage = fileTree("${buildDir}/jacoco/testDebugUnitTestCoverage.exec")
     val androidTestCoverage = fileTree("buildDir}/outputs/code-coverage/connected/")
 
