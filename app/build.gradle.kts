@@ -58,7 +58,7 @@ tasks.register<JacocoReport>("combinedCoverageReport") {
     )
 
     val unitTestCoverage = fileTree("${buildDir}/jacoco/testDebugUnitTestCoverage.exec")
-    val androidTestCoverage = fileTree("buildDir}/outputs/code-coverage/connected/")
+    val androidTestCoverage = fileTree("${buildDir}/outputs/code-coverage/connected/")
 
     executionData.setFrom(files(unitTestCoverage, androidTestCoverage))
 
