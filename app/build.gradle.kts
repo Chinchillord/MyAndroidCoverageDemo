@@ -54,7 +54,7 @@ tasks.register<JacocoReport>("combinedCoverageReport") {
         "src/main/kotlin"
     )
 
-    val unitTestCoverage = fileTree("/bitrise/src/app/build/reports/coverage/test/debug/")
+    val unitTestCoverage = fileTree("/bitrise/src/app/build/reports/coverage/test/debug/index.html")
     val androidTestCoverage = fileTree("/bitrise/src/app/build/reports/coverage/androidTest/debug/connected/")
 
     executionData.setFrom(files(unitTestCoverage, androidTestCoverage))
