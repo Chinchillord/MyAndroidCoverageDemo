@@ -45,8 +45,6 @@ android {
 }
 
 tasks.register<JacocoReport>("combinedCoverageReport") {
-    dependsOn(["createDebugUnitTestCoverageReport", "createDebugAndroidTestCoverageReport"])
-
     reports {
         xml.required.set(true)
         html.required.set(true)
