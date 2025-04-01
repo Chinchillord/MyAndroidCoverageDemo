@@ -61,6 +61,11 @@ tasks.register<JacocoReport>("combinedCoverageReport") {
 
     sourceDirectories.setFrom(files("${project.projectDir}/src/main/java"))
     classDirectories.setFrom(files("${buildDir}/intermediates/javac/debug/classes"))
+    doLast {
+        println("🔍 Combined Coverage Report Generated at:")
+        println("  📄 XML Report: ${reports.xml.outputLocation.get().asFile.absolutePath}")
+        println("  📂 HTML Report: ${reports.html.outputLocation.get().asFile.absolutePath}")
+    }
 }
 
 dependencies {
