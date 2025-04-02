@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("jacoco")
 }
 
 android {
@@ -43,6 +44,19 @@ android {
         compose = true
     }
 }
+
+tasks.withType<Test>().configureEach {
+    finalizedBy(tasks.named("jacocoTestReport")) // Ensures JaCoCo runs after tests
+}
+
+tasks.named<JacocoReport>("jacocoTestReport") {
+    reports {
+        xml.required.set(true)  // SonarQube needs XML format
+        html.required.set(false)
+        csv.required.set(false)
+    }
+}
+
 
 tasks.register<JacocoReport>("combinedCoverageReport") {
     reports {
