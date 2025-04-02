@@ -45,10 +45,6 @@ android {
     }
 }
 
-tasks.withType<Test>().configureEach {
-    finalizedBy(tasks.named("jacocoTestReport")) // Ensures JaCoCo runs after tests
-}
-
 tasks.named<JacocoReport>("jacocoTestReport") {
     reports {
         xml.required.set(true)  // SonarQube needs XML format
@@ -57,6 +53,9 @@ tasks.named<JacocoReport>("jacocoTestReport") {
     }
 }
 
+tasks.withType<Test>().configureEach {
+    finalizedBy(tasks.named("jacocoTestReport")) // Ensures JaCoCo runs after tests
+}
 
 tasks.register<JacocoReport>("combinedCoverageReport") {
     reports {
