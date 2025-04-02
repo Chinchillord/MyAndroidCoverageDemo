@@ -45,18 +45,6 @@ android {
     }
 }
 
-tasks.named<JacocoReport>("jacocoTestReport") {
-    reports {
-        xml.required.set(true)  // SonarQube needs XML format
-        html.required.set(false)
-        csv.required.set(false)
-    }
-}
-
-tasks.withType<Test>().configureEach {
-    finalizedBy(tasks.named("jacocoTestReport")) // Ensures JaCoCo runs after tests
-}
-
 tasks.register<JacocoReport>("combinedCoverageReport") {
     reports {
         html.required.set(true)
