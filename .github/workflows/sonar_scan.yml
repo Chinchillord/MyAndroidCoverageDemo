@@ -35,3 +35,9 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
+        with:
+          # this could also be defined in sonar-project.properties
+          args: >
+            -Dsonar.projectKey=Chinchillord_MyAndroidCoverageDemo \
+            -Dsonar.organization=chinchillord \
+            -Dsonar.coverage.jacoco.xmlReportPaths=app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml

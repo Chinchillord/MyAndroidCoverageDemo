@@ -60,7 +60,7 @@ tasks.register<JacocoReport>("jacocoTestReport") {
 
     classDirectories.setFrom(kotlinClasses)
     sourceDirectories.setFrom(files("src/main/java", "src/main/kotlin"))
-    executionData.setFrom(fileTree(layout.buildDirectory).include("**/jacoco/testDebugUnitTest.exec"))
+    executionData.setFrom(fileTree(layout.buildDirectory).include("**/debugUnitTest/testDebugUnitTest.exec"))
 }
 
 tasks.register<JacocoReport>("combinedCoverageReport") {
