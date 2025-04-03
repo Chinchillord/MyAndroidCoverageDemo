@@ -29,22 +29,8 @@ jobs:
       - name: Run tests with coverage
         run: ./gradlew createDebugCoverageReport
 
-      - name: Download and Set Up Sonar Scanner CLI
-        run: |
-          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
-          unzip sonar-scanner-cli-5.0.1.3006-linux.zip
-          mv sonar-scanner-5.0.1.3006-linux sonar-scanner
-          echo "$PWD/sonar-scanner/bin" >> $GITHUB_PATH
-
-      - name: Run Sonar Scanner
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v5.1.0
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          sonar-scanner \
-            -Dsonar.projectKey=your_project_key \
-            -Dsonar.sources=app/src/main/java \
-            -Dsonar.tests=app/src/test/java \
-            -Dsonar.java.binaries=app/build/intermediates/javac/debug/classes \
-            -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.login=$SONAR_TOKEN \
-            -Dsonar.coverageReportPaths=app/build/reports/coverage/debug/coverageDebugReport.xml
+          SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
