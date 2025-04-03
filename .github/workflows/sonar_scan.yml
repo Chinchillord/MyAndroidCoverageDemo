@@ -38,6 +38,6 @@ jobs:
         with:
           # this could also be defined in sonar-project.properties
           args: >
-            -Dsonar.projectKey=Chinchillord_MyAndroidCoverageDemo \
-            -Dsonar.organization=chinchillord \
+            -Dsonar.projectKey=Chinchillord_MyAndroidCoverageDemo 
+            -Dsonar.organization=chinchillord 
             -Dsonar.coverage.jacoco.xmlReportPaths=app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
