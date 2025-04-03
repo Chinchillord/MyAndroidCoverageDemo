@@ -12,6 +12,7 @@ jobs:
   unit-tests:
     name: Build and Run Unit Tests
     runs-on: ubuntu-latest
+    environment: TestEnv
 
     steps:
       - name: checkout repo
