@@ -45,6 +45,24 @@ android {
     }
 }
 
+tasks.register<JacocoReport>("jacocoTestReport") {
+    dependsOn("testDebugUnitTest")
+
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
+
+    val fileFilter = listOf("**/R.class", "**/BuildConfig.*", "**/Manifest*.*", "**/*Test*.*")
+    val kotlinClasses = fileTree("${layout.buildDirectory}/tmp/kotlin-classes/debug") {
+        exclude(fileFilter)
+    }
+
+    classDirectories.setFrom(kotlinClasses)
+    sourceDirectories.setFrom(files("src/main/java", "src/main/kotlin"))
+    executionData.setFrom(fileTree(layout.buildDirectory).include("**/jacoco/testDebugUnitTest.exec"))
+}
+
 tasks.register<JacocoReport>("combinedCoverageReport") {
     reports {
         html.required.set(true)
@@ -60,8 +78,8 @@ tasks.register<JacocoReport>("combinedCoverageReport") {
 
     executionData.setFrom(files(unitTestCoverage, androidTestCoverage))
 
-    sourceDirectories.setFrom(files("${project.projectDir}/src/main/java"))
-    classDirectories.setFrom(files("${buildDir}/intermediates/javac/debug/classes"))
+    sourceDirectories.setFrom(coverageSourceDirs)
+    classDirectories.setFrom(files("${layout.buildDirectory}/intermediates/javac/debug/classes"))
     doLast {
         println("🔍 Combined Coverage Report Generated at:")
         println("  📄 XML Report: ${reports.xml.outputLocation.get().asFile.absolutePath}")
