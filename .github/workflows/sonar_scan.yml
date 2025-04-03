@@ -28,7 +28,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Run tests with coverage
-        run: ./gradlew testDebugUnitTest
+        run: ./gradlew jacocoTestReport
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5.1.0
